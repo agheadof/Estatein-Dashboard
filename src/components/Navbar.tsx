@@ -3,8 +3,14 @@ import { NavLink } from "react-router-dom"
 const tabs = [
   { name: "Properties", path: "/create/properties" },
   { name: "Services", path: "/create/services" },
-  { name: "Site Settings", path: "/create/site_settings" },
   { name: "Testimonials", path: "/create/testimonials" },
+  { name: "FAQs", path: "/create/faqs" },
+  { name: "Achievements", path: "/create/achievements" },
+  { name: "Team", path: "/create/team" },
+  { name: "Clients", path: "/create/clients" },
+  { name: "Contact", path: "/create/contact" },
+  { name: "Locations", path: "/create/locations" },
+  { name: "Site Settings", path: "/create/site_settings" },
 ]
 
 const Navbar = () => {

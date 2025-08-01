@@ -2,9 +2,9 @@ import { useRef, useState } from "react"
 import { db } from "../../firebaseConfig"
 import { push, ref, set } from "firebase/database"
 
-const Testimonials = () => {
+const Team = () => {
   const formRef = useRef<HTMLFormElement>(null)
-  const [clientImageUrl, setClientImageUrl] = useState<string>("")
+  const [memberImageUrl, setMemberImageUrl] = useState<string>("")
   const [uploadingMain, setUploadingMain] = useState(false)
 
   const handleImageUpload = async (
@@ -34,78 +34,63 @@ const Testimonials = () => {
   const handleMainImage = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
     if (file) {
-      handleImageUpload(file, (url) => setClientImageUrl(url), setUploadingMain)
+      handleImageUpload(file, (url) => setMemberImageUrl(url), setUploadingMain)
     }
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+
     const form = formRef.current
     if (!form) return
 
     const get = (name: string) =>
       (form.elements.namedItem(name) as HTMLInputElement)?.value || ""
 
-    const data = {
-      name: get("name"),
-      location: get("location"),
-      subject: get("subject"),
-      review: get("review"),
-      clientImage: clientImageUrl,
+    const propertyData = {
+      title: get("title"),
+      description: get("description"),
+      clientImage: memberImageUrl,
     }
 
-    console.log("FINAL DATA:", data)
-
+    console.log("FINAL PROPERTY:", propertyData)
     try {
-      const newRef = push(ref(db, "testimonials"))
-      await set(newRef, data)
-      console.log("Added successfully")
+      const newRef = push(ref(db, "team"))
+      await set(newRef, propertyData)
+      console.log("Added !!")
     } catch (error) {
       console.error("Failed", error)
     }
   }
-
   return (
     <form
       ref={formRef}
       onSubmit={handleSubmit}
       className="space-y-4 p-6 max-w-3xl my-10 mx-auto bg-[#703BF7]/10 rounded-2xl"
     >
-      <h2 className="text-2xl font-bold">Basic Info</h2>
-
+      <h2 className="text-2xl font-bold">Team Member</h2>
       <input
         name="name"
-        placeholder="Client Name"
-        className="border border-[#1A1A1A]/50 rounded-lg p-2 w-full"
+        placeholder="Name"
+        className="border border-[#1A1A1A]/50 rounded-lg mr-2 p-2"
       />
       <input
-        name="location"
-        placeholder="Client Location"
-        className="border border-[#1A1A1A]/50 rounded-lg p-2 w-full"
-      />
-      <input
-        name="subject"
-        placeholder="Subject"
-        className="border border-[#1A1A1A]/50 rounded-lg p-2 w-full"
+        name="role"
+        placeholder="Role"
+        className="border border-[#1A1A1A]/50 rounded-lg mr-2 p-2 block"
       />
 
-      <textarea
-        name="review"
-        placeholder="Client Review"
-        className="border border-[#1A1A1A]/50 rounded-lg p-2 w-full"
-      />
-
-      <h2 className="text-xl font-bold mt-6">Client Image</h2>
+      <h2 className="text-xl font-bold mt-6">Member Image</h2>
       <input
         type="file"
         accept=".png, .jpg, .jpeg, .webp"
         onChange={handleMainImage}
         className="border border-[#1A1A1A]/50 rounded-lg mr-2 p-2"
       />
-      {uploadingMain && <p>Uploading main image...</p>}
-      {clientImageUrl && (
+      {uploadingMain && <p>Uploading image...</p>}
+      {memberImageUrl && (
         <img
-          src={clientImageUrl}
+          src={memberImageUrl}
           className="w-24 h-24 object-cover rounded mt-2"
         />
       )}
@@ -114,10 +99,10 @@ const Testimonials = () => {
         type="submit"
         className="bg-[#1A1A1A] text-white px-4 py-3 rounded-lg w-full mt-6 hover:bg-[#703BF7]"
       >
-        Submit Review
+        Submit Member
       </button>
     </form>
   )
 }
 
-export default Testimonials
+export default Team

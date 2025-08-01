@@ -153,7 +153,7 @@ const Properties = () => {
       <input
         className="border border-[#1A1A1A]/50 rounded-lg mr-2 p-2"
         type="file"
-        accept="image/*"
+        accept=".png, .jpg, .jpeg, .webp"
         multiple
         onChange={handleImageUpload}
       />
@@ -263,7 +263,7 @@ const Properties = () => {
 
       <button
         type="submit"
-        className="hover:bg-[#703BF7] p-3 rounded-lg text-white cursor-pointer bg-[#1A1A1A] mt-6 transition-all duration-100 ease-in-out"
+        className="bg-[#1A1A1A] text-white px-4 py-3 rounded-lg w-full mt-6 hover:bg-[#703BF7]"
       >
         Submit Property
       </button>
