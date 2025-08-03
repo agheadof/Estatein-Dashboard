@@ -47,16 +47,16 @@ const Team = () => {
     const get = (name: string) =>
       (form.elements.namedItem(name) as HTMLInputElement)?.value || ""
 
-    const propertyData = {
-      title: get("title"),
-      description: get("description"),
+    const data = {
+      name: get("name"),
+      role: get("role"),
       clientImage: memberImageUrl,
     }
 
-    console.log("FINAL PROPERTY:", propertyData)
+    console.log("FINAL Data:", data)
     try {
       const newRef = push(ref(db, "team"))
-      await set(newRef, propertyData)
+      await set(newRef, data)
       console.log("Added !!")
     } catch (error) {
       console.error("Failed", error)
