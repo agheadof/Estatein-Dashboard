@@ -14,6 +14,7 @@ import Team from "./pages/create/Team.tsx"
 import Contact from "./pages/create/Contact.tsx"
 import Locations from "./pages/create/Locations.tsx"
 import Clients from "./pages/create/Clients.tsx"
+import { Toaster } from "react-hot-toast"
 
 const router = createHashRouter([
   {
@@ -72,5 +73,6 @@ const router = createHashRouter([
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <RouterProvider router={router} />
+    <Toaster position="bottom-center" reverseOrder={false} />
   </StrictMode>
 )

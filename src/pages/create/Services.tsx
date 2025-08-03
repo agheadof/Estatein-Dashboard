@@ -1,9 +1,12 @@
 import { useRef, useState } from "react"
 import { db } from "../../firebaseConfig"
 import { push, ref, set } from "firebase/database"
+import toast from "react-hot-toast"
+import SubmitButton from "../../components/SubmitButton"
 
 const Services = () => {
   const formRef = useRef<HTMLFormElement>(null)
+  const [loading, setLoading] = useState(false)
   const [mainImageUrl, setMainImageUrl] = useState<string>("")
   const [uploadingMain, setUploadingMain] = useState(false)
   const [subServices, setSubServices] = useState<
@@ -83,6 +86,8 @@ const Services = () => {
     const form = formRef.current
     if (!form) return
 
+    setLoading(true)
+
     const get = (name: string) =>
       (form.elements.namedItem(name) as HTMLInputElement)?.value || ""
 
@@ -106,7 +111,8 @@ const Services = () => {
       await set(newRef, data)
       console.log("Added successfully")
     } catch (error) {
-      console.error("Failed", error)
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -203,12 +209,7 @@ const Services = () => {
         className="border border-[#1A1A1A]/50 rounded-lg p-2 w-full"
       />
 
-      <button
-        type="submit"
-        className="bg-[#1A1A1A] text-white px-4 py-3 rounded-lg w-full mt-6 hover:bg-[#703BF7]"
-      >
-        Submit Service
-      </button>
+      <SubmitButton loading={loading} text="Submit Service" />
     </form>
   )
 }

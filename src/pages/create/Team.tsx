@@ -1,9 +1,12 @@
 import { useRef, useState } from "react"
 import { db } from "../../firebaseConfig"
 import { push, ref, set } from "firebase/database"
+import toast from "react-hot-toast"
+import SubmitButton from "../../components/SubmitButton"
 
 const Team = () => {
   const formRef = useRef<HTMLFormElement>(null)
+  const [loading, setLoading] = useState(false)
   const [memberImageUrl, setMemberImageUrl] = useState<string>("")
   const [uploadingMain, setUploadingMain] = useState(false)
 
@@ -44,6 +47,8 @@ const Team = () => {
     const form = formRef.current
     if (!form) return
 
+    setLoading(true)
+
     const get = (name: string) =>
       (form.elements.namedItem(name) as HTMLInputElement)?.value || ""
 
@@ -57,9 +62,11 @@ const Team = () => {
     try {
       const newRef = push(ref(db, "team"))
       await set(newRef, data)
-      console.log("Added !!")
+      toast.success("✅ Data added successfully!")
+      formRef.current?.reset()
     } catch (error) {
-      console.error("Failed", error)
+    } finally {
+      setLoading(false)
     }
   }
   return (
@@ -95,12 +102,7 @@ const Team = () => {
         />
       )}
 
-      <button
-        type="submit"
-        className="bg-[#1A1A1A] text-white px-4 py-3 rounded-lg w-full mt-6 hover:bg-[#703BF7]"
-      >
-        Submit Member
-      </button>
+      <SubmitButton loading={loading} text="Submit Member" />
     </form>
   )
 }
