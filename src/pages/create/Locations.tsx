@@ -21,6 +21,7 @@ const Locations = () => {
       email: get("email"),
       phone: get("phone"),
       city: get("city"),
+      category: get("category")
     }
 
     console.log("FINAL PROPERTY:", propertyData)
@@ -50,6 +51,17 @@ const Locations = () => {
         placeholder="Address"
         className="border border-[#1A1A1A]/50 rounded-lg mr-2 p-2"
       />
+      <select
+        name="category"
+        className="border border-[#1A1A1A]/50 rounded-lg mr-2 p-2"
+        defaultValue=""
+        >
+          <option value="" disabled>
+            Select Category
+          </option>
+          <option value="regional">Regional</option>
+          <option value="international">International</option>
+      </select>
       <textarea
         name="details"
         placeholder="Location Details"
