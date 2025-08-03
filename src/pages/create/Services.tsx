@@ -104,12 +104,11 @@ const Services = () => {
       learnText: get("learnText"),
     }
 
-    console.log("FINAL DATA:", data)
-
     try {
       const newRef = push(ref(db, "services"))
       await set(newRef, data)
-      console.log("Added successfully")
+      toast.success("✅ Data added successfully!")
+      formRef.current?.reset()
     } catch (error) {
     } finally {
       setLoading(false)

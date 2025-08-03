@@ -64,7 +64,8 @@ const Testimonials = () => {
     try {
       const newRef = push(ref(db, "testimonials"))
       await set(newRef, data)
-      console.log("Added successfully")
+      toast.success("✅ Data added successfully!")
+      formRef.current?.reset()
     } catch (error) {
     } finally {
       setLoading(false)
