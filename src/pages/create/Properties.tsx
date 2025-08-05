@@ -145,18 +145,18 @@ const Properties = () => {
         placeholder="Area (m²)"
         className="border border-[#1A1A1A]/50 rounded-lg mr-2 p-2"
       />
-      <input
+      <textarea
         name="features"
         placeholder="Features (comma separated)"
-        className="border border-[#1A1A1A]/50 rounded-lg mr-2 p-2"
+        className="border border-[#1A1A1A]/50 rounded-lg mr-2 p-2 w-full h-auto"
       />
       <textarea
         name="description"
         placeholder="Description"
-        className="border border-[#1A1A1A]/50 rounded-lg mr-2 p-2 block"
+        className="border border-[#1A1A1A]/50 rounded-lg mr-2 p-2 block w-full h-auto"
       />
 
-      <h2 className="text-2xl font-bold mt-8">Upload Images</h2>
+      <h2 className="text-2xl font-bold mt-8">Upload All Images</h2>
       <input
         className="border border-[#1A1A1A]/50 rounded-lg mr-2 p-2"
         type="file"
