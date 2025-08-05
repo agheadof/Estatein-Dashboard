@@ -61,6 +61,9 @@ const Properties = () => {
       features: get("features")
         .split(",")
         .map((f) => f.trim()),
+      tags: get("tags")
+        .split(",")
+        .map((f) => f.trim()),
 
       images: imageUrls,
 
@@ -69,7 +72,6 @@ const Properties = () => {
         legalFees: parseFloat(get("legalFees")),
         inspection: parseFloat(get("inspection")),
         insurance: parseFloat(get("insurance")),
-        mortgageFees: parseFloat(get("mortgageFees")),
       },
 
       monthlyCosts: {
@@ -151,6 +153,11 @@ const Properties = () => {
         className="border border-[#1A1A1A]/50 rounded-lg mr-2 p-2 w-full h-auto"
       />
       <textarea
+        name="tags"
+        placeholder="Tags (comma separated)"
+        className="border border-[#1A1A1A]/50 rounded-lg mr-2 p-2 w-full h-auto"
+      />
+      <textarea
         name="description"
         placeholder="Description"
         className="border border-[#1A1A1A]/50 rounded-lg mr-2 p-2 block w-full h-auto"
@@ -199,12 +206,6 @@ const Properties = () => {
         name="insurance"
         type="number"
         placeholder="Property Insurance"
-        className="border border-[#1A1A1A]/50 rounded-lg mr-2 p-2"
-      />
-      <input
-        name="mortgageFees"
-        type="number"
-        placeholder="Mortgage Fees"
         className="border border-[#1A1A1A]/50 rounded-lg mr-2 p-2"
       />
 

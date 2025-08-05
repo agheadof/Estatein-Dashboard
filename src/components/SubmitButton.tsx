@@ -13,7 +13,7 @@ const SubmitButton = ({
     <button
       type="submit"
       disabled={loading}
-      className={`w-full mt-6 px-4 py-3 rounded-lg text-white transition ${
+      className={`w-full mt-6 px-4 py-3 rounded-lg text-white transition cursor-pointer ${
         loading
           ? "bg-gray-500 cursor-not-allowed"
           : "bg-[#1A1A1A] hover:bg-[#703BF7]"
